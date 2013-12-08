@@ -1,0 +1,10 @@
+body.background {
+	background: url('../images/background_480x800.jpg') left top no-repeat;
+}
+body.background section[role="region"] > .content {
+	background: inherit;
+}
+
+body.background [data-type="list"] li p {
+	color: #FFF;
+}
