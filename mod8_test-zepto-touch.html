@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Test Zepto Touch</title>
+		<meta name="author" content="Carlos Bello Pauste">
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">   
+		<style>
+			/* Ajustar botón para que ocupe todo el ancho en pantallas pequeñas */
+			@media screen and (max-width: 640px) {
+				button { width: 100%;}
+			}
+			/* Ocultar la imagen del resultado esperado */
+			img { display: none; max-width: 100%; margin-top: 20px; }
+			/* Mostrar resultado esperado al mantener pulsado el enlace */
+			a:active + img { display: block; }
+		</style>     
+    </head>
+<body>
+    <h1>Test Zepto Touch</h1>
+    
+    <p>Este dispositivo <strong id="txtSoporte"></strong> soporta los eventos touch de Zepto: 
+    se utilizará el evento <code id="txtEvento"></code>.</p>
+    
+    <p>Para ver la diferencia, ejecutar en un navegador de escritorio y después en el simulador de Firefox OS.</p>
+    
+    <button id="btnTest">&nbsp;</button>
+    
+    <p>Mantén pulsado <a href="#">aquí</a> para ver el resultado que deberías obtener.    
+   	<img src="images/mod8_test-zepto-touch.png">
+    </p>
+    
+    <script type="text/javascript" src="js/zepto/zepto.min.js"></script>
+    <script type="text/javascript" src="js/zepto/detect.js"></script>
+    <script type="text/javascript" src="js/zepto/touch.js"></script>
+    <script>
+    	/**
+    	 * Usando el módulo Detect de Zepto, detecta si la página se está
+    	 * ejecutando en un dispositivo móvil o no y, como consecuencia,
+    	 * se asume que se está en presencia de un dispositivo con 
+    	 * capacidad táctil.
+    	 * No obstante, podría estarse en presencia de una pantalla en un
+    	 * ordenador portátil o de escritorio que sea también táctil, en
+    	 * cuyo caso, se conciderará como no táctil pues Detect no es capaz
+    	 * de hacer esta distinción.
+    	 */
+        function esUnDispositivoTactil() {
+        	return !!$.os.phone || !!$.os.tablet;
+        }
+        
+        /**
+         * Acción ilustrativa que se ejecuta al pulsar el botón, independientemente
+         * del evento (click o tap) que se haya asociado al botón. 
+         */
+        function mostrarMensaje() {
+        	alert('Botón pulsado.');
+        }
+        
+        /**
+         * Inicializa los textos y el manejador de eventos del botón.
+         */
+        function inicializarTextosYEventos() {
+	        var evento,
+	            soporteTactil;
+        
+	        if (esUnDispositivoTactil()) {
+	            soporteTactil = 'si';
+	        	evento = 'tap';
+	        } else {
+	            soporteTactil = 'no';
+	        	evento = 'click';
+	        }       
+	        
+	        $('#txtEvento').text(evento);
+	        $('#txtSoporte').text(soporteTactil);
+	        $('#btnTest').text('Haga ' + evento + ' aquí');
+	        $('#btnTest').on(evento, mostrarMensaje);
+		}
+
+		inicializarTextosYEventos();
+    </script>
+</body>
+</html>
