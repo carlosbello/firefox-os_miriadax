@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Tercer Ejercicio Obligatorio: JavaScript</title>
+		<meta name="description" content="">
+		<meta name="author" content="Carlos Bello Pauste">
+	</head>
+	<body>
+		<h1>Tercer Ejercicio Obligatorio: JavaScript</h1>
+		<table>
+			<caption>Propiedades del objeto window.location</caption>
+			<thead>	
+				<tr>
+					<th>Nombre</th>
+					<th>Valor</th>
+				</tr>
+			</thead>
+			<tbody id="cuerpoTabla">				
+			</tbody>
+		</table>
+		
+		<script>
+			var cuerpoTabla = document.getElementById('cuerpoTabla');
+			var filas = "";
+			var valor;
+			for(propiedad in location) {
+				valor = typeof location[propiedad] === 'string' 
+					? location[propiedad]
+					: 'no es imprimible';
+				filas += '<tr><td>' + propiedad + '</td><td>' + valor + '</td><td>';
+			}
+			cuerpoTabla.innerHTML = filas;
+		</script>
+	</body>
+</html>
