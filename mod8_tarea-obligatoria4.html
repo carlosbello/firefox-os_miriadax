@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cronómetro</title>
+	<meta charset="UTF-8">
+	<meta name="author" content="Carlos Bello Pauste">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0">
+</head>
+<body>
+	<h2>Cronómetro</h2>
+	<h3><span id="txtCrono">0.0</span> segundos </h3>
+	<button type="button" id="btnCambiar">arrancar/parar</button>
+	<button type="button" id="btnInicializar">inicializar</button>
+	<p id="txtLista">
+	</p>
+	<!--
+		Los scripts al final de la página son una buena práctica para acelerar la visualización
+		de contenido importante para el usuario
+	-->
+	<script type="text/javascript" src="js/zepto/zepto.min.js"></script>
+	<script type="text/javascript" src="js/zepto/touch.js"></script>
+	<script type="text/javascript">
+		var temporizador,
+			txtCrono = $("#txtCrono"),
+			txtLista = $('#txtLista');
+	
+		function incr() {
+			localStorage.c = +localStorage.c + 0.01;
+		}
+	
+		function mostrar() {
+			txtCrono.html((+localStorage.c).toFixed(2));
+		}
+		
+		function arrancar() {
+			temporizador = setInterval(
+					function() {
+						incr();
+						mostrar();
+					}, 
+					100
+			);
+		}
+		
+		function parar() {
+			clearInterval(temporizador);
+			temporizador = undefined;
+			actualizarLista(localStorage.lista + txtCrono.html() + "<br>");
+		}
+		
+		function cambiar() {
+			if (!temporizador)
+				arrancar();
+			else
+				parar();
+		}
+	
+		function actualizarLista(valor) {
+			localStorage.lista = valor;
+			txtLista.html(localStorage.lista);
+		}
+		
+	
+		function inicializar() {
+			if (temporizador) return;
+			
+			localStorage.c = "0.00";
+			mostrar();
+			actualizarLista("");
+		}
+		
+		// Inicializar el almacenamiento local
+		localStorage.c = (localStorage.c || "0.00");
+		localStorage.lista = localStorage.lista || "";
+		// Inicializar los eventos touch
+		$('body').on('swipe', inicializar);
+		$('body').on('tap', cambiar);
+		// Eliminar los eventos touch indeseados (para evitar la ejecución doble: tap y click) 
+		$('body button').on('tap', false);
+		// Inicializar los eventos del ratón (equivalentes a tap, en pantallas táctiles)
+		$("#btnCambiar").on('click', cambiar);
+		$("#btnInicializar").on('click', inicializar);
+		// Inicializar contenido a mostrar
+		mostrar();
+		txtLista.html(localStorage.lista);
+	</script>
+</body>
+</html>
