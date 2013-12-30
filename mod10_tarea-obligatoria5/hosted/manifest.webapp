@@ -1,0 +1,21 @@
+{
+	"version": "0.1",
+	"name": "RutasFF",
+	"description": "Generador de rutas",
+	"launch_path": "/host/0B8vaJO9aOVyESWJrRk9vUHVSX1E/mod10_tarea-obligatoria5/hosted/main.html",
+	"icons": {
+		"60":  "/host/0B8vaJO9aOVyESWJrRk9vUHVSX1E/mod10_tarea-obligatoria5/hosted/images/ico_60.png"
+	},
+	"developer": {
+		"name": "Carlos Bello Pauste",
+		"url": "http://linkedin.com/in/carlosbello"
+	},
+	"permissions": {
+	    "geolocation": {
+	      "description": "Utilizado para centrar el mapa en la posición actual"
+      	},
+      	"storage": {
+			"description": "Guardar la ruta generada para próximas ejecuciones."
+		}
+  	}
+}

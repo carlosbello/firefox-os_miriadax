@@ -1,0 +1,14 @@
+{
+  "name": "Titanes del ajedrez",
+  "description": "Aplicación de ejemplo del curso de desarrollo de aplicaciones para Firefox de @miriadax",
+  "launch_path": "/main.html",
+  "icons": {
+    "60": "/images/app_icon.png"
+  },
+  "version": "0.1",
+  "developer": {
+    "name": "Carlos Bello Pauste",
+    "url": "https://linkedin.com/in/carlosbello"
+  },
+  "default_locale": "es"
+}
